@@ -6,10 +6,10 @@ from .discriminator import Discriminator
 class CycleGAN(nn.Module):
     def __init__(self):
         super(CycleGAN, self).__init__()
-        self.generator_A2B = Generator()
-        self.generator_B2A = Generator()
-        self.discriminator_A = Discriminator()
-        self.discriminator_B = Discriminator()
+        self.generator_A2B = Generator(in_channels=3, out_channels=3)
+        self.generator_B2A = Generator(in_channels=3, out_channels=3)
+        self.discriminator_A = Discriminator(in_channels=3)
+        self.discriminator_B = Discriminator(in_channels=3)
 
     def forward(self, real_A, real_B):
         
@@ -34,4 +34,4 @@ class CycleGAN(nn.Module):
 
         total_gen_loss = adv_loss_A2B + adv_loss_B2A + cycle_loss_A + cycle_loss_B
 
-        return fake_A, fake_B, reconstructed_A, reconstructed_B, total_gen_loss
+        return fake_A, fake_B, reconstructed_A, reconstructed_B

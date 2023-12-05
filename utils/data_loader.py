@@ -7,7 +7,7 @@ class ImageDataset(Dataset):
     def __init__(self, root, transform=None):
         self.root = root
         self.transform = transform
-        self.images = os.listdir(root)
+        self.images = [f for f in os.listdir(root) if os.path.isfile(os.path.join(root, f))]
 
     def __len__(self):
         return len(self.images)
@@ -20,7 +20,6 @@ class ImageDataset(Dataset):
             img = self.transform(img)
 
         return img
-
 def get_data_loader(root, batch_size):
     transform = transforms.Compose([
         transforms.Resize((256, 256)),
