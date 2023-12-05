@@ -4,8 +4,8 @@ from .generator import Generator
 from .discriminator import Discriminator
 
 class CycleGAN(nn.Module):
-    def init(self):
-        super(CycleGAN, self).init()
+    def __init__(self):
+        super(CycleGAN, self).__init__()
         self.generator_A2B = Generator()
         self.generator_B2A = Generator()
         self.discriminator_A = Discriminator()
