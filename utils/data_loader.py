@@ -4,15 +4,15 @@ from PIL import Image
 import os
 
 class ImageDataset(Dataset):
-    def init(self, root, transform=None):
+    def __init__(self, root, transform=None):
         self.root = root
         self.transform = transform
         self.images = os.listdir(root)
 
-    def len(self):
+    def __len__(self):
         return len(self.images)
 
-    def getitem(self, index):
+    def __getitem__(self, index):
         img_path = os.path.join(self.root, self.images[index])
         img = Image.open(img_path).convert("RGB")
 
