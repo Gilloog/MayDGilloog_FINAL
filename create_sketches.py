@@ -19,7 +19,7 @@ def create_sketch(input_path, output_path):
     cv2.imwrite(output_path, sketch)
 
 
-input_folder = "cars_test/cars_test"
+input_folder = "data/cars_test/cars_test"
 output_folder = "Sketches"
 
 
