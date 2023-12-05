@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-from generator import Generator
-from discriminator import Discriminator
+from .generator import Generator
+from .discriminator import Discriminator
 
 class CycleGAN(nn.Module):
     def init(self):
