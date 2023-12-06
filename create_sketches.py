@@ -3,7 +3,6 @@ import os
 import shutil
 
 def create_sketch(input_path, output_path):
-    
     image = cv2.imread(input_path, cv2.IMREAD_GRAYSCALE)
 
     
@@ -13,18 +12,16 @@ def create_sketch(input_path, output_path):
     inverted = cv2.bitwise_not(blurred)
 
     
-    _, sketch = cv2.threshold(inverted, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    _, sketch = cv2.threshold(inverted, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
     
     cv2.imwrite(output_path, sketch)
 
 def clear_and_create_sketches(input_folder, output_folder):
-    
     if os.path.exists(output_folder):
         shutil.rmtree(output_folder)
     os.makedirs(output_folder)
 
-    
     for filename in os.listdir(input_folder):
         if filename.endswith((".jpg", ".png", ".jpeg")):
             input_path = os.path.join(input_folder, filename)
