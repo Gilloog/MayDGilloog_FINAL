@@ -43,7 +43,7 @@ def evaluate_model(model, test_dataloader, output_folder="output_images"):
 
 
 def train(model, dataloader_A, dataloader_B, num_epochs=10, lr=0.0002, save_folder="saved_models"):
-
+    model.train()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     model.to(device)
