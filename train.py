@@ -42,10 +42,10 @@ def evaluate_model(model, test_dataloader, output_folder="output_images"):
     print(f"Evaluated Images saved in the '{output_folder}'")
 
 
-def train(model, dataloader_A, dataloader_B, num_epochs=10, lr=0.0002, save_folder="saved_models"):
+def train(model, dataloader_A, dataloader_B, num_epochs=100, lr=0.0002, save_folder="saved_models"):
     model.train()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+    os.makedirs(save_folder, exist_ok=True)
     model.to(device)
     optimizer = optim.Adam(model.parameters(), lr=lr)
     
@@ -69,8 +69,8 @@ def train(model, dataloader_A, dataloader_B, num_epochs=10, lr=0.0002, save_fold
             
            
             pred_fake_B, pred_real_B = model.discriminator_B(fake_A, real_B)
-            adv_loss_B2A = criterion_MSE(pred_fake_B[0], torch.zeros_like(pred_fake_B[0]))
-            adv_loss_A2B = criterion_MSE(pred_real_B[0], torch.ones_like(pred_real_B[0]))
+            adv_loss_A2B = criterion_MSE(pred_fake_B[0], torch.zeros_like(pred_fake_B[0]))
+            adv_loss_B2A = criterion_MSE(pred_real_B[0], torch.ones_like(pred_real_B[0]))
             
             resized_fake_B = torch.nn.functional.interpolate(fake_B, size=(real_B.size(2), real_B.size(3)), mode='bilinear', align_corners=False)
             cycle_loss_B = criterion_MSE(resized_fake_B, real_B)
@@ -80,8 +80,11 @@ def train(model, dataloader_A, dataloader_B, num_epochs=10, lr=0.0002, save_fold
             optimizer.zero_grad()
             total_gen_loss.backward()
             optimizer.step()
-
-
+            print(f"Epoch: {epoch}")
+            print(f"Total Generator Loss: {total_gen_loss}")
+            print(f"Cycle Loss A: {cycle_loss_A}")
+            print(f"Cycle Loss B: {cycle_loss_B}")
+    torch.save(model.state_dict(), os.path.join(save_folder, f"trained_model.pth"))
 
 data_root_A = "data/cars_train/cars_train"
 data_root_B = "data/Sketches"
@@ -94,10 +97,9 @@ dataloader_A = get_data_loader(data_root_A, batch_size)
 dataloader_B = get_data_loader(data_root_B, batch_size)
 dataloader_C = get_data_loader(data_root_C, batch_size)
 
-model = CycleGAN(in_channels=3, out_channels=3)
+model = CycleGAN(in_channels=1, out_channels=1)
 model.to(device)
+
 train(model, dataloader_A, dataloader_B, num_epochs=10, lr=0.0002, save_folder=save_models_folder)
-os.makedirs(save_models_folder, exist_ok=True)
-save_path = os.path.join(save_models_folder, f'saved_model.pth')
-torch.save(model.state_dict(), save_path)
+
 evaluate_model(model, dataloader_C)

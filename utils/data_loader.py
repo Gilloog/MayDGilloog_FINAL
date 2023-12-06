@@ -3,7 +3,7 @@ from torchvision import transforms
 from PIL import Image
 import os
 
-class ImageDataset(Dataset):
+class SingleChannelImageDataset(Dataset):
     def __init__(self, root, transform=None):
         self.root = root
         self.transform = transform
@@ -14,19 +14,21 @@ class ImageDataset(Dataset):
 
     def __getitem__(self, index):
         img_path = os.path.join(self.root, self.images[index])
-        img = Image.open(img_path).convert("RGB")
+        img = Image.open(img_path).convert("L")  
 
         if self.transform:
             img = self.transform(img)
 
         return img
+
 def get_data_loader(root, batch_size):
     transform = transforms.Compose([
         transforms.Resize((256, 256)),
+        transforms.Grayscale(num_output_channels=1),
         transforms.ToTensor(),
     ])
 
-    dataset = ImageDataset(root, transform)
+    dataset = SingleChannelImageDataset(root, transform)
     loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
     return loader

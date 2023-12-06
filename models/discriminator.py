@@ -1,11 +1,11 @@
+import torch
 import torch.nn as nn
-import torch 
 class Discriminator(nn.Module):
     def __init__(self, in_channels):
         super(Discriminator, self).__init__()
 
         self.model_Sketch = nn.Sequential(
-            nn.Conv2d(in_channels, 64, kernel_size=4, stride=2, padding=1),
+            nn.Conv2d(1, 64, kernel_size=4, stride=2, padding=1),  
             nn.LeakyReLU(0.2),
 
             nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1),
@@ -21,7 +21,7 @@ class Discriminator(nn.Module):
         )
 
         self.model_Real = nn.Sequential(
-            nn.Conv2d(in_channels, 64, kernel_size=4, stride=2, padding=1),
+            nn.Conv2d(in_channels, 64, kernel_size=4, stride=2, padding=1),  
             nn.LeakyReLU(0.2),
 
             nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1),

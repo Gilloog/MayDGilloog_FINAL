@@ -9,10 +9,10 @@ class CycleGAN(nn.Module):
         super(CycleGAN, self).__init__()
 
         self.generator_SketchToReal = Generator(in_channels, out_channels)
-        self.generator_RealToSketch = Generator(in_channels, out_channels)
+        self.generator_RealToSketch = Generator(out_channels, in_channels)  
 
         self.discriminator_Sketch = Discriminator(in_channels)
-        self.discriminator_Real = Discriminator(in_channels)
+        self.discriminator_Real = Discriminator(in_channels)  
 
     def forward(self, x_Sketch, x_Real):
         fake_Real = self.generator_SketchToReal(x_Sketch)
