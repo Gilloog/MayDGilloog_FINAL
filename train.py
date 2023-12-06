@@ -100,6 +100,6 @@ dataloader_C = get_data_loader(data_root_C, batch_size)
 model = CycleGAN(in_channels=1, out_channels=1)
 model.to(device)
 
-train(model, dataloader_A, dataloader_B, num_epochs=10, lr=0.0002, save_folder=save_models_folder)
+train(model, dataloader_A, dataloader_B, num_epochs=25, lr=0.0002, save_folder=save_models_folder)
 
 evaluate_model(model, dataloader_C)
