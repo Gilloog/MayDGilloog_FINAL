@@ -42,7 +42,7 @@ def evaluate_model(model, test_dataloader, output_folder="output_images"):
     print(f"Evaluated Images saved in the '{output_folder}'")
 
 
-def train(model, dataloader_A, dataloader_B, num_epochs=100, lr=0.0002, save_folder="saved_models"):
+def train(model, dataloader_B, dataloader_A, num_epochs=100, lr=0.0002, save_folder="saved_models"):
     model.train()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     os.makedirs(save_folder, exist_ok=True)
