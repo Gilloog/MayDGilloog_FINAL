@@ -48,7 +48,7 @@ def train(model, dataloader_A, dataloader_B, num_epochs=10, lr=0.0002, save_fold
 
     model.to(device)
     optimizer = optim.Adam(model.parameters(), lr=lr)
-    os.makedirs(save_folder, exist_ok=True)
+    
 
     criterion_MSE = torch.nn.MSELoss()
 
@@ -81,9 +81,6 @@ def train(model, dataloader_A, dataloader_B, num_epochs=10, lr=0.0002, save_fold
             total_gen_loss.backward()
             optimizer.step()
 
-        save_path = os.path.join(save_folder, f'model_epoch_{epoch + 1}.pth')
-        torch.save(model.state_dict(), save_path)
-
 
 
 data_root_A = "data/cars_train/cars_train"
@@ -100,4 +97,7 @@ dataloader_C = get_data_loader(data_root_C, batch_size)
 model = CycleGAN(in_channels=3, out_channels=3)
 model.to(device)
 train(model, dataloader_A, dataloader_B, num_epochs=10, lr=0.0002, save_folder=save_models_folder)
+os.makedirs(save_models_folder, exist_ok=True)
+save_path = os.path.join(save_models_folder, f'saved_model.pth')
+torch.save(model.state_dict(), save_path)
 evaluate_model(model, dataloader_C)
