@@ -13,4 +13,23 @@ dataset: https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset
 3. Next create a Sketches folder inside the data folder /data/Sketches
 4. Lastly verify that the cars_test and Cars_train as well as the cars_anno.mat are in the data folder as well
 
-   
+Models:
+
+
+
+Software Deoendencies:
+PyTorch, Matplotlib, OpenCV, Shutil and Pillow
+
+These can all be downloaded into your conda environment by this pip command 
+pip install torch torchvision matplotlib opencv-python pillow
+
+Running the Project:
+Once you have downloaded the dataset and have setup the correct folders and insured that all paths are correct:
+
+    Run the train.py script- 
+    python code/train.py --dataset_path=data/train --epochs=50
+
+    Run the evaluation.py script-
+    python code/evaluate.py --model_path=models/contextual_gan.h5 --test_data=data/test
+
+
