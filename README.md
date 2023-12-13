@@ -21,14 +21,17 @@ Software Deoendencies:
 PyTorch, Matplotlib, OpenCV, Shutil and Pillow
 
 These can all be downloaded into your conda environment by this pip command 
+
 pip install torch torchvision matplotlib opencv-python pillow
 
 Running the Project:
 Once you have downloaded the dataset and have setup the correct folders and insured that all paths are correct:
     
-    Run create_ketches.py script-
+    Run create_sketches.py script-
     python create_sketches.py
 
     Run the train.py script- 
     python train.py --dataset_path=data/train --epochs=50
+
+After running the create_sketches.py sketches will show in the data/Sketches folder.
 
