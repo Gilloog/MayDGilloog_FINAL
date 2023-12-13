@@ -14,7 +14,7 @@ dataset: https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset
 4. Lastly verify that the cars_test and Cars_train as well as the cars_anno.mat are in the data folder as well
 
 Models:
-
+No trained models have been saved sorry 
 
 
 Software Deoendencies:
