@@ -25,6 +25,7 @@ pip install torch torchvision matplotlib opencv-python pillow
 
 Running the Project:
 Once you have downloaded the dataset and have setup the correct folders and insured that all paths are correct:
+    
     Run create_ketches.py script-
     python create_sketches.py
 
