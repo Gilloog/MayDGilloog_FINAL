@@ -11,7 +11,7 @@ dataset: https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset
 1. follow the link and download the dataset
 2. unzip the folder into the location of the repository in the folder data/
 3. Next create a Sketches folder inside the data folder /data/Sketches
-4. Lastly verify that the cars_test and Cars_train as well as the cars_anno.mat are in the data folder as well
+4. Lastly verify that the cars_test and cars_train as well as the cars_anno.mat are in the data folder as well
 
 Models:
 No trained models have been saved sorry 
